@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
         <p>Login with Facebook</p>
         <?= yii\authclient\widgets\AuthChoice::widget([
-            'baseAuthUrl' => ['site/auth'],
+            'baseAuthUrl' => ['/user/default/auth'],
             'popupMode' => false,
         ]) ?>
     </div>
