@@ -1,18 +1,18 @@
 <?php
 
-namespace backend\controllers;
+namespace frontend\controllers;
 
 use Yii;
-use common\models\Sklad;
-use backend\models\search\SkladSearch;
+use common\models\Country;
+use frontend\models\search\CountrySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * SkladController implements the CRUD actions for Sklad model.
+ * CountryController implements the CRUD actions for country model.
  */
-class SkladController extends Controller
+class CountryController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class SkladController extends Controller
     }
 
     /**
-     * Lists all Sklad models.
+     * Lists all country models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SkladSearch();
+        $searchModel = new CountrySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class SkladController extends Controller
     }
 
     /**
-     * Displays a single Sklad model.
+     * Displays a single country model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class SkladController extends Controller
     }
 
     /**
-     * Creates a new Sklad model.
+     * Creates a new country model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Sklad();
+        $model = new Country();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class SkladController extends Controller
     }
 
     /**
-     * Updates an existing Sklad model.
+     * Updates an existing country model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class SkladController extends Controller
     }
 
     /**
-     * Deletes an existing Sklad model.
+     * Deletes an existing country model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class SkladController extends Controller
     }
 
     /**
-     * Finds the Sklad model based on its primary key value.
+     * Finds the country model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Sklad the loaded model
+     * @return Country the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sklad::findOne($id)) !== null) {
+        if (($model = Country::findOne($id)) !== null) {
             return $model;
         }
 

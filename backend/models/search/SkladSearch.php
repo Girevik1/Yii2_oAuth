@@ -1,15 +1,18 @@
 <?php
 
-namespace common\models;
+namespace backend\models\search;
 
+use common\models\Sklad;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductSearch represents the model behind the search form of `common\models\Product`.
+ * SkladSearch represents the model behind the search form of `common\models\Sklad`.
  */
-class ProductSearch extends Product
+class SkladSearch extends Sklad
 {
+    public $cost;
+
     /**
      * {@inheritdoc}
      */
@@ -17,7 +20,8 @@ class ProductSearch extends Product
     {
         return [
             [['id'], 'integer'],
-            [['cost', 'type_id', 'text', 'sklad_id'], 'safe'],
+            [['title', 'address'], 'safe'],
+            [['cost'], 'safe']
         ];
     }
 
@@ -39,13 +43,25 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find()->joinWith('sklad');
+        $query = Sklad::find()->joinWith('product');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->setSort([
+            'attributes' => array_merge($dataProvider->getSort()->attributes,[
+                'cost' => [
+                    'asc' => ['cost' => SORT_ASC],
+                    'desc' => ['cost' => SORT_DESC],
+                    'default' => SORT_ASC,
+                    'label' => 'Цена'
+                ]
+            ])
+            ]
+        );
 
         $this->load($params);
 
@@ -58,13 +74,13 @@ class ProductSearch extends Product
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'sklad_id' => $this->sklad_id,
+            //'product.sclad_id'=>$this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'cost', $this->cost])
-            ->andFilterWhere(['like', 'type_id', $this->type_id])
-            ->andFilterWhere(['like', 'text', $this->text]);
-//            ->andFilterWhere(['like', 'sklad.title', $this->sklad_id]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'address', $this->address]);
+            //->andFilterWhere(['like', 'product.cost', $this->cost]);
+
         return $dataProvider;
     }
 }
