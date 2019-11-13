@@ -21,8 +21,8 @@ class PersonSearch extends Person
     public function rules()
     {
         return [
-            [['id', 'first_name', 'country_id'], 'integer'],
-            [['last_name', 'parent_id', 'fullName'], 'safe'],
+            [['id', 'country_id'], 'integer'],
+            [['last_name', 'first_name', 'parent_id', 'fullName'], 'safe'],
         ];
     }
 
@@ -72,33 +72,31 @@ class PersonSearch extends Person
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+        return $dataProvider;
         }
-
 
         $this->addCondition($query, 'id');
         $this->addCondition($query, 'first_name', true);
         $this->addCondition($query, 'last_name', true);
         $this->addCondition($query, 'country_id');
 
+
         /* Настроим правила фильтрации */
 
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'first_name' => $this->first_name,
+            //'first_name' => $this->first_name,
         ]);
 
         $query->andFilterWhere(['like', 'last_name', $this->last_name])
             ->andFilterWhere(['like', 'country_id', $this->country_id])
             ->andFilterWhere(['like', 'parent_id', $this->parent_id]);
-        // фильтр по имени
+
+        // Фильтр по полному имени
         $query->andWhere('first_name LIKE "%' . $this->fullName . '%" ' .
             'OR last_name LIKE "%' . $this->fullName . '%"'
         );
-
 
         return $dataProvider;
     }

@@ -29,7 +29,7 @@ class Person extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'country_id', 'parent_id'], 'required'],
+            [['first_name', 'last_name', 'country_id'], 'required'],
             [['last_name', 'first_name'], 'string', 'max' => 255],
             [['parent_id'], 'string', 'max' => 50],
             [['country_id'], 'integer']
@@ -43,18 +43,20 @@ class Person extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'country_id' => 'country ID',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'country_id' => 'Страна',
             'parent_id' => 'Parent ID',
-            'fullName' => 'Full Name',
+            'fullName' => 'ФИО',
         ];
     }
+
 
     /* Геттер для полного имени человека */
     public function getFullName() {
         return $this->first_name . ' ' . $this->last_name;
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

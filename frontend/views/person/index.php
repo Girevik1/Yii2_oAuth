@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute' => 'country_id', 'value' => 'countryName', 'filter' => \common\models\Country::getCountries()],
             //['attribute' => 'sklad_id', 'value' => 'skladName' ],
             //'parent_id',
-
+//            'parentName',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

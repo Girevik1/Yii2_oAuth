@@ -39,7 +39,7 @@ class Country extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'country_name' => 'country Name',
+            'country_name' => 'Страна',
         ];
     }
 

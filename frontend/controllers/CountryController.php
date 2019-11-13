@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use common\models\Country;
 use frontend\models\search\CountrySearch;
@@ -26,6 +27,7 @@ class CountryController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            AccessBehavior::className(),
         ];
     }
 
