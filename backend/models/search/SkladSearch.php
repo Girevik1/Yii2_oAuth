@@ -56,7 +56,7 @@ class SkladSearch extends Sklad
                 'cost' => [
                     'asc' => ['cost' => SORT_ASC],
                     'desc' => ['cost' => SORT_DESC],
-                    'default' => SORT_ASC,
+                    'user' => SORT_ASC,
                     'label' => 'Цена'
                 ]
             ])

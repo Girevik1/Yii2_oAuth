@@ -11,7 +11,7 @@
  */
 
 // you may need to adjust this path to the correct Yii framework path
-// uncomment and adjust the following line if Yii is not located at the default path
+// uncomment and adjust the following line if Yii is not located at the user path
 //$frameworkPath = dirname(__FILE__) . '/vendor/yiisoft/yii2';
 if (!isset($frameworkPath)) {
     $searchPaths = array(

@@ -9,7 +9,7 @@ use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
 
 /**
- * AuthHandler handles successful authentication via Yii auth component
+ * AuthHandler handles successful authentication via Yii user component
  */
 class AuthHandler
 {

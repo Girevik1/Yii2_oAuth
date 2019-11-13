@@ -6,7 +6,7 @@ use Yii;
 use common\models\User;
 
 /**
- * This is the model class for table "auth".
+ * This is the model class for table "user".
  *
  * @property int $id
  * @property int $user_id
@@ -22,7 +22,7 @@ class Auth extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'auth';
+        return 'user';
     }
 
     /**

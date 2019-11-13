@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -35,18 +36,20 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Главная', 'url' => ['/site/index']],
-        ['label' => 'Люди', 'url' => ['/person/index']],
-        ['label' => 'Страны', 'url' => ['/country/index']],
 
-    ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/default/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/default/login']];
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/user/signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/user/user/login']];
     } else {
+        $menuItems = [
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Люди', 'url' => ['/person/index']],
+            ['label' => 'Страны', 'url' => ['/country/index']],
+
+        ];
+
         $menuItems[] = '<li>'
-            . Html::beginForm(['/user/default/logout'], 'post')
+            . Html::beginForm(['/user/user/logout'], 'post')
             . Html::submitButton(
                 'Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
@@ -54,6 +57,8 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,

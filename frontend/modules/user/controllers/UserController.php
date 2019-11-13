@@ -2,6 +2,7 @@
 
 namespace frontend\modules\user\controllers;
 
+use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use frontend\modules\user\models\ResendVerificationEmailForm;
 use frontend\modules\user\models\VerifyEmailForm;
@@ -11,7 +12,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-
 use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
@@ -20,7 +20,7 @@ use frontend\modules\user\components\AuthHandler;
 /**
  * Default controller for the `user` module
  */
-class DefaultController extends Controller
+class UserController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -44,6 +44,7 @@ class DefaultController extends Controller
                     ],
                 ],
             ],
+            //AccessBehavior::className(),
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -59,7 +60,7 @@ class DefaultController extends Controller
     public function actions()
     {
         return [
-            'auth' => [
+            'user' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],

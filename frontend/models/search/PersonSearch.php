@@ -63,7 +63,7 @@ class PersonSearch extends Person
                     'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
                     'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
                     'label' => 'Full Name',
-                    'default' => SORT_ASC
+                    'user' => SORT_ASC
                 ],
                 'country_id'
             ]

@@ -24,7 +24,7 @@ class AccessBehavior extends Behavior
     public function checkAccess()
     {
         if (Yii::$app->user->isGuest) {
-            return Yii::$app->controller->redirect('site/login');
+            return Yii::$app->controller->redirect('/user/user/login');
         }
     }
 }
