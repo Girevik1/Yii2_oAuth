@@ -36,7 +36,6 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/user/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/user/login']];
@@ -44,10 +43,12 @@ AppAsset::register($this);
         $menuItems = [
             ['label' => 'Главная', 'url' => ['/site/index']],
             ['label' => 'Люди', 'url' => ['/person/index']],
-            ['label' => 'Страны', 'url' => ['/country/index']],
+            ['label' => 'Фото', 'url' => ['/media/index']],
 
+            Yii::$app->user->can('admin') ?
+                ['label' => 'Страны', 'url' => ['/country/index']] :
+                false,
         ];
-
         $menuItems[] = '<li>'
             . Html::beginForm(['/user/user/logout'], 'post')
             . Html::submitButton(
@@ -57,7 +58,6 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
-
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

@@ -21,7 +21,8 @@ class AuthHandler
 
     public function __construct(ClientInterface $client)
     {
-        $this->client = $client;
+       $this->client = $client;
+
     }
 
     public function handle()
@@ -38,6 +39,7 @@ class AuthHandler
             $user = $auth->user;
             return Yii::$app->user->login($user);
         }
+
         if ($user = $this->createAccount($attributes)) {
             return Yii::$app->user->login($user);
         }
@@ -64,10 +66,12 @@ class AuthHandler
      */
     private function createAccount($attributes)
     {
-        $email = ArrayHelper::getValue($attributes, 'email');
-        $id = ArrayHelper::getValue($attributes, 'id');
-        $name = ArrayHelper::getValue($attributes, 'name');
 
+
+        $email = ArrayHelper::getValue($attributes, 'email');
+
+        $id = ArrayHelper::getValue($attributes, 'id');
+        $name = ArrayHelper::getValue($attributes, 'first_name');
         if ($email !== null && User::find()->where(['email' => $email])->exists()) {
             return;
         }

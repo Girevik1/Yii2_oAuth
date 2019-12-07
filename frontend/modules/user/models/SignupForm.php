@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\modules\user\models;
 
 use Yii;
@@ -23,38 +24,57 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Пользователь с таким Email уже зарегистрирован'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+
+//            ['role', 'required'],
+//            ['role', 'string'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'username' => 'Имя',
+            'email' => 'Email',
+            'password' => 'Пароль',
         ];
     }
 
     /**
      * Signs user up.
      *
-     * @return bool whether the creating new account was successful and email was sent
+     * @return mixed whether the creating new account was successful and email was sent
      */
     public function signup()
     {
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
+        $user->password_hash = Yii::$app->security->generatePasswordHash($this->password);
+        $user->auth_key = Yii::$app->security->generateRandomString();
         $user->generateEmailVerificationToken();
-        return $user->save() && $this->sendEmail($user);
+        if ($user->save() && $this->sendEmail($user)) {
+
+            // нужно добавить следующие три строки:
+            $auth = Yii::$app->authManager;
+            $authorRole = $auth->getRole('user');
+            $auth->assign($authorRole, $user->getId());
+
+            return $user;
+        }
 
     }
 
@@ -65,6 +85,7 @@ class SignupForm extends Model
      */
     protected function sendEmail($user)
     {
+
         return Yii::$app
             ->mailer
             ->compose(

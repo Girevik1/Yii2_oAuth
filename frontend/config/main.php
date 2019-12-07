@@ -14,6 +14,7 @@ return [
     'modules' => [
         'user' => [
             'class' => 'frontend\modules\user\Module',
+
         ],
     ],
     'components' => [
@@ -21,6 +22,7 @@ return [
             'csrfParam' => '_csrf-frontend',
         ],
         'user' => [
+            //'class' => 'yii\web\User',
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],

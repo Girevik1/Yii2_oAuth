@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\modules\models\SignupForm */
+/* @var $model frontend\modules\user\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -33,3 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+<!--<script type="text/javascript" src="https://vk.com/js/api/openapi.js?162"></script>-->
+<!--<script type="text/javascript">-->
+<!--    VK.init({apiId: 7208659});-->
+<!--</script>-->
+<!---->
+
+<!--<div id="vk_auth"></div>-->
+<!--<script type="text/javascript">-->
+<!--    VK.Widgets.Auth("vk_auth", {"authUrl":"/dev/Login"});-->
+<!--</script>-->

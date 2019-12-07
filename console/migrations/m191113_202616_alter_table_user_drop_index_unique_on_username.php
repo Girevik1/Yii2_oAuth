@@ -12,7 +12,7 @@ class m191113_202616_alter_table_user_drop_index_unique_on_username extends Migr
      */
     public function safeUp()
     {
-$this->dropIndex('username', 'user');
+        $this->dropIndex('username', 'user');
     }
 
     /**
@@ -20,7 +20,7 @@ $this->dropIndex('username', 'user');
      */
     public function safeDown()
     {
-       $this->createIndex('username','user','username', $unique = true);
+        $this->createIndex('username', 'user', 'username', $unique = true);
 
         return false;
     }

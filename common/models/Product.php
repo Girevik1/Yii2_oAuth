@@ -67,9 +67,9 @@ class Product extends \yii\db\ActiveRecord
     }
 
     public function getSkladName()
-    {
-        return (isset($this->sklad)) ? $this->sklad->title :' не задан';
-    }
+{
+    return (isset($this->sklad)) ? $this->sklad->title :' не задан';
+}
 
     public function getTypeName()
     {

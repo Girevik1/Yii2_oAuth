@@ -2,7 +2,6 @@
 
 namespace frontend\modules\user\controllers;
 
-use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use frontend\modules\user\models\ResendVerificationEmailForm;
 use frontend\modules\user\models\VerifyEmailForm;
@@ -16,6 +15,7 @@ use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
 use frontend\modules\user\models\SignupForm;
 use frontend\modules\user\components\AuthHandler;
+use frontend\controllers\behaviors\AccessBehavior;
 
 /**
  * Default controller for the `user` module
@@ -60,7 +60,7 @@ class UserController extends Controller
     public function actions()
     {
         return [
-            'user' => [
+            'auth' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
@@ -118,10 +118,11 @@ class UserController extends Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success',
                 'Thank you for registration. Please check your inbox for verification email.');
-            return $this->goHome();
+            return $this->render('index');
         }
 
         return $this->render('signup', [
@@ -138,6 +139,7 @@ class UserController extends Controller
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
             if ($model->sendEmail()) {
                 Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
 
