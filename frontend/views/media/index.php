@@ -18,10 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
     foreach ($medias as $media) {
         ?>
         <div class="col-md-3">
-            <div class="card">
-                <img src="<?= Yii::getAlias('@web').'/'.$media->filepath; ?>" alt="" class="card-mg-top" width="100%">
+            <div class="card" style="height:100%">
+                <img src="<?= Yii::getAlias('@web').'/'.$media->filepath; ?>" alt="" class="card-img-top" width="100%">
                 <div class="card-body">
-                    <h5 class="card-title"><?php $media->filename; ?></h5>
+                    <h5 class="card-title" style="word-wrap: break-word"><?php $media->filename; ?></h5>
+<div class="text-right">
+    <?php
+    echo Html::a('Download', ['download', 'id'=>$media->id], ['class'=>'btn btn-primary']);
+    echo "&nbsp;";
+    echo Html::a('Delete', ['delete', 'id'=>$media->id], ['class'=>'btn btn-danger']);
+    ?>
+</div>
                 </div>
             </div>
         </div>

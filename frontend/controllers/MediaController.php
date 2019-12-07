@@ -17,6 +17,22 @@ class MediaController extends \yii\web\Controller
         return $this->render('index', ['medias' => $data]);
     }
 
+    public function actionDownload($id)
+    {
+        $data = Media::findOne($id);
+        header('Content-Type:'.pathinfo($data->filepath, PATHINFO_EXTENSION));
+        header('Content-Disposition: attachment; filename='.$data->filename);
+        return readfile($data->filepath);
+    }
+
+    public function actionDelete($id)
+    {
+        $data = Media::findOne($id);
+        unlink($data->filepath);
+        $data->delete();
+        return $this->redirect(['index']);
+    }
+
     /**
      * @return string|void
      * @throws \yii\db\Exception
