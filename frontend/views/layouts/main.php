@@ -42,6 +42,7 @@ AppAsset::register($this);
     } else {
         $menuItems = [
             ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Блог', 'url' => ['/blog/index']],
             ['label' => 'Люди', 'url' => ['/person/index']],
             ['label' => 'Фото', 'url' => ['/media/index']],
 

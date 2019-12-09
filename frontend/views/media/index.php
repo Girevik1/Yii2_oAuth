@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     foreach ($medias as $media) {
         ?>
         <div class="col-md-3">
-            <div class="card" style="height:100%">
+            <div class="card" style="height:255px; width:200px">
                 <img src="<?= Yii::getAlias('@web').'/'.$media->filepath; ?>" alt="" class="card-img-top" width="100%">
                 <div class="card-body">
                     <h5 class="card-title" style="word-wrap: break-word"><?php $media->filename; ?></h5>

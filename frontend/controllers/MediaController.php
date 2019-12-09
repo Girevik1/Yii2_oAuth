@@ -17,14 +17,24 @@ class MediaController extends \yii\web\Controller
         return $this->render('index', ['medias' => $data]);
     }
 
+    /**
+     * @param $id
+     * @return false|int
+     */
     public function actionDownload($id)
     {
         $data = Media::findOne($id);
-        header('Content-Type:'.pathinfo($data->filepath, PATHINFO_EXTENSION));
-        header('Content-Disposition: attachment; filename='.$data->filename);
+        header('Content-Type:' . pathinfo($data->filepath, PATHINFO_EXTENSION));
+        header('Content-Disposition: attachment; filename=' . $data->filename);
         return readfile($data->filepath);
     }
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionDelete($id)
     {
         $data = Media::findOne($id);

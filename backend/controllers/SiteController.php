@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use common\models\Blog;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -60,7 +61,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = Blog::find()->andWhere(['status_id' => 1])->orderBy('sort')->all();
+        return $this->render('index', ['model' => $model]);
     }
 
     /**
