@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Blog;
-use backend\models\search\BlogSearch;
+use common\models\Tag;
+use backend\models\search\TagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BlogController implements the CRUD actions for Blog model.
+ * TagController implements the CRUD actions for Tag model.
  */
-class BlogController extends Controller
+class TagController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class BlogController extends Controller
     }
 
     /**
-     * Lists all Blog models.
+     * Lists all Tag models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new BlogSearch();
+        $searchModel = new TagSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Displays a single Blog model.
+     * Displays a single Tag model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class BlogController extends Controller
     }
 
     /**
-     * Creates a new Blog model.
+     * Creates a new Tag model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Blog();
+        $model = new Tag();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Updates an existing Blog model.
+     * Updates an existing Tag model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class BlogController extends Controller
     }
 
     /**
-     * Deletes an existing Blog model.
+     * Deletes an existing Tag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class BlogController extends Controller
     }
 
     /**
-     * Finds the Blog model based on its primary key value.
+     * Finds the Tag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return array|\yii\db\ActiveRecord
+     * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Blog::find()->with('tags')->andWhere(['id' => $id])->one()) !== null) {
+        if (($model = Tag::findOne($id)) !== null) {
             return $model;
         }
 

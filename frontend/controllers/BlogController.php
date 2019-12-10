@@ -6,6 +6,7 @@ use frontend\controllers\behaviors\AccessBehavior;
 use Yii;
 use common\models\Blog;
 use backend\models\search\BlogSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
@@ -34,12 +35,18 @@ class BlogController extends Controller
 
 
     /**
-     * @return string
+     * @return mixed
      */
     public function actionIndex()
     {
-        $blogs = Blog::find()->andWhere(['status_id' => 1])->orderBy('sort')->all();
-        return $this->render('all', ['blogs' => $blogs]);
+        $blogs = Blog::find()->with('author')->andWhere(['status_id' => 1])->orderBy('sort');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $blogs,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('all', ['dataProvider' => $dataProvider]);
     }
 
 

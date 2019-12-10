@@ -3,20 +3,19 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\BlogSearch */
+/* @var $searchModel backend\models\search\TagSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Blogs';
+$this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="blog-index">
+<div class="tag-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Blog', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -29,22 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            //'text:ntext',
-            [
-            'attribute' =>'url',
-            'format' => 'raw',
-            ],
-            [
-            'attribute' => 'status_id',
-            'filter' => \common\models\Blog::getStatusList(),
-            'value' => 'statusName',
-            ],
-            'sort',
-            [
-            'attribute' => 'tags',
-            'value' => 'tagsAsString',
-            ],
+            'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
