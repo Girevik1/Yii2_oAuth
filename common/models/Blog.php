@@ -79,32 +79,52 @@ class Blog extends \yii\db\ActiveRecord
         return $list[$this->status_id];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getBlogTag()
     {
         return $this->hasMany(BlogTag::className(), ['blog_id' => 'id']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTags()
     {
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->via('blogTag');
     }
 
+    /**
+     * @return string
+     */
     public function getTagsAsString()
     {
         $arr = ArrayHelper::map($this->tags, 'id', 'name');
         return implode(',',$arr);
     }
 
+    /**
+     *@brief присвоение текущих тегов
+     */
     public function afterFind()
     {
         $this->tags_array = $this->tags;
     }
 
+    /**
+     * @brief Сохранение тегов после создания или обновления блога
+     * @param bool $insert
+     * @param array $changedAttributes
+     */
     public function afterSave($insert, $changedAttributes)
     {
         parent::afterSave($insert, $changedAttributes);
