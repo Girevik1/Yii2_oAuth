@@ -3,13 +3,10 @@
 namespace frontend\controllers;
 
 use frontend\controllers\behaviors\AccessBehavior;
-use Yii;
 use common\models\Blog;
-use backend\models\search\BlogSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**

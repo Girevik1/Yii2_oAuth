@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "blog_tag".
  *
  * @property int $id
- * @property string $blog_id
- * @property string $tag_id
+ * @property int $blog_id
+ * @property int $tag_id
  */
 class BlogTag extends \yii\db\ActiveRecord
 {
@@ -28,7 +28,7 @@ class BlogTag extends \yii\db\ActiveRecord
     {
         return [
             [['blog_id', 'tag_id'], 'required'],
-            [['blog_id', 'tag_id'], 'safe'],
+            [['blog_id', 'tag_id'], 'integer'],
         ];
     }
 

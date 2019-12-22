@@ -18,6 +18,15 @@ class MediaController extends \yii\web\Controller
     }
 
     /**
+     * @return string
+     */
+    public function actionGallery()
+    {
+        $data = Media::find()->all();
+        return $this->render('gallery', ['medias' => $data]);
+    }
+
+    /**
      * @param $id
      * @return false|int
      */

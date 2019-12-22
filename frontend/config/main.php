@@ -20,6 +20,9 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
             //'class' => 'yii\web\User',
@@ -45,8 +48,13 @@ return [
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
+            //'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+//                ['class' => 'yii\rest\UrlRule',
+//                'controller' => 'test',
+//                'pluralize' => false],
+
                 'blog/<url>' => 'blog/one',
                 'blog' => 'blog/index'
             ],

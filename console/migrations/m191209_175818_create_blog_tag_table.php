@@ -14,8 +14,8 @@ class m191209_175818_create_blog_tag_table extends Migration
     {
         $this->createTable('{{%blog_tag}}', [
             'id' => $this->primaryKey(),
-            'blog_id' => $this->string(50)->notNull(),
-            'tag_id' => $this->string(50)->notNull(),
+            'blog_id' => $this->integer()->notNull(),
+            'tag_id' => $this->integer()->notNull(),
         ]);
     }
 

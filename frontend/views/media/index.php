@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+/* @var $medias array */
 
 use yii\helpers\Html;
 
