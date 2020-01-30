@@ -45,7 +45,7 @@ AppAsset::register($this);
             ['label' => 'Блог', 'url' => ['/blog/index']],
             ['label' => 'Люди', 'url' => ['/person/index']],
             ['label' => 'Фото', 'url' => ['/media/index']],
-            ['label' => 'Галлерия-изотоп', 'url' => ['/media/gallery']],
+            ['label' => 'Галерия-изотоп', 'url' => ['/media/gallery']],
 
 
             Yii::$app->user->can('admin') ?

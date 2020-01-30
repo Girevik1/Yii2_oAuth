@@ -1,4 +1,5 @@
 <?php
+
 use yii\widgets\ListView;
 
 
@@ -8,12 +9,12 @@ use yii\widgets\ListView;
 $blog = $dataProvider->getModels();
 ?>
 
-<div class="body-content">
-
-    <?=
-    ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemView' => '_one',
-    ]) ?>
-
+<div class="content">
+    <div class="row">
+        <?=
+        ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemView' => '_one',
+        ]) ?>
+    </div>
 </div>

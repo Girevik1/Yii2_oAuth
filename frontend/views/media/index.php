@@ -1,5 +1,6 @@
 <?php
 /* @var $this yii\web\View */
+
 /* @var $medias array */
 
 use yii\helpers\Html;
@@ -20,16 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <div class="col-md-3">
             <div class="card" style="height:255px; width:200px">
-                <img src="<?= Yii::getAlias('@web').'/'.$media->filepath; ?>" alt="" class="card-img-top" width="100%">
+                <img src="<?= Yii::getAlias('@web') . '/' . $media->filepath; ?>" alt="" class="card-img-top img-thumbnail"
+                     width="100%">
                 <div class="card-body">
                     <h5 class="card-title" style="word-wrap: break-word"><?php $media->filename; ?></h5>
-<div class="text-right">
-    <?php
-    echo Html::a('Download', ['download', 'id'=>$media->id], ['class'=>'btn btn-primary']);
-    echo "&nbsp;";
-    echo Html::a('Delete', ['delete', 'id'=>$media->id], ['class'=>'btn btn-danger']);
-    ?>
-</div>
+                    <p class="card-text">
+                        Some quick example text to build on the card title
+                        and make up the bulk of the card's content.
+                    </p>
+                    <div class="text-right">
+                        <?php
+                        echo Html::a('Download', ['download', 'id' => $media->id], ['class' => 'btn btn-primary']);
+                        echo "&nbsp;";
+                        echo Html::a('Delete', ['delete', 'id' => $media->id], ['class' => 'btn btn-danger']);
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
